@@ -7,3 +7,5 @@ test-win:
 # default tests
 test:
 	./vendor/bin/phpunit
+
+# separate Docker internal, external, mixed commands

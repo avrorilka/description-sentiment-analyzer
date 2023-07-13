@@ -1,0 +1,16 @@
+version: '3.8'
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - ./:/app
+    depends_on:
+      - composer
+    command: php /app/analyzer.php print -internal
+
+  composer:
+    image: composer:latest
+    volumes:
+      - ./:/app

@@ -22,6 +22,11 @@ php analyzer.php print -external
 php analyzer.php print -all
 ```
 
+Also you can use docker-compose (by default it will calculate internal scores)
+```
+docker-compose up
+```
+
 The table consists of products sorted by score, with minimum and maximum values displayed at the end.
 
 **<p>Table output of _Internal_ service</p>**
