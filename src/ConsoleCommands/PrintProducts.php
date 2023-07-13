@@ -84,8 +84,8 @@ class PrintProducts extends Command
 
         $tableData = [];
         $lastArrNumb = count($data) - 1;
-        $maxScore = $data[0]['score'];
-        $minScore = $data[$lastArrNumb]['score'];
+        $maxScore = round($data[0]['score'], 5);
+        $minScore = round($data[$lastArrNumb]['score'], 5);
 
         foreach ($data as $row) {
             $name = strlen($row['name']) > 45 ? substr($row['name'], 0, 42) . '...' : $row['name'];
