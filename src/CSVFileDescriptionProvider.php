@@ -4,32 +4,36 @@ namespace App;
 
 class CSVFileDescriptionProvider implements DescriptionProviderInterface
 {
-    private $file;
+    private string $filePath;
 
-    public function __construct($file)
+    /**
+     * @param $filePath
+     */
+    public function __construct($filePath = null)
     {
-        $this->file = $file;
+        empty($filePath) ?: $this->filePath = $filePath;
+
+        if (is_null($filePath)) {
+            $this->filePath = './products.csv';
+        }
     }
 
     public function readProducts(): array
     {
-        $rows = file($this->file, FILE_IGNORE_NEW_LINES);
+        $products = [];
 
-        $descriptions = [];
-        foreach ($rows as $index => $row) {
-            if ($index === 0) {
+        $handle = fopen($this->filePath, "r");
+        while (($row = fgetcsv($handle)) !== false) {
+            if ($row[0] == 'name' && $row[1] == 'description') {
                 continue;
             }
+            $name = $row[0] ?? '';
+            $description = trim(strip_tags($row[1])) ?? '';
 
-            $data = str_getcsv($row);
-            $name = trim($data[0], '"');
-
-            $description = trim($data[1], '"');
-            $description = strip_tags($description);
-
-            $descriptions[] = new Product($name, $description);
+            $products[] = empty($name) ?: new Product($name, $description);
         }
+        fclose($handle);
 
-        return $descriptions;
+        return $products;
     }
 }
