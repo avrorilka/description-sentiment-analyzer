@@ -1,5 +1,7 @@
 <?php
 
+namespace ExternalAPIs;
+
 use App\ExternalAPIs\TwinwordSentimentAPI;
 use App\Product\Product;
 use GuzzleHttp\Client;

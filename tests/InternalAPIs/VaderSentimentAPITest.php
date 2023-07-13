@@ -1,5 +1,7 @@
 <?php
 
+namespace InternalAPIs;
+
 use App\InternalAPIs\VaderSentimentAPI;
 use App\Product\Product;
 use PHPUnit\Framework\TestCase;

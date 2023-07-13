@@ -1,5 +1,7 @@
 <?php
 
+namespace Product;
+
 use App\Product\ProductCSVReader;
 use PHPUnit\Framework\TestCase;
 
