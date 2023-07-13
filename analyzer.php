@@ -2,10 +2,10 @@
 <?php
 require_once 'vendor/autoload.php';
 
-use App\Commands\Run;
+use App\Commands\PrintProducts;
 use Symfony\Component\Console\Application;
 
 $app = new Application();
 
-$app->add(new Run());
+$app->add(new PrintProducts());
 $app->run();

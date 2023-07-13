@@ -35,35 +35,19 @@ class VaderSentimentAPITest extends TestCase
     public function testGetAllSentiments()
     {
         $products = [
-            new Product('Caffeine 90 tbl - GymBeam', "Caffeine is made by caffeine tablets with up to 200 mg of caffeine, the most popular stimulant in the world. It is used by bodybuilders, athletes, but also by other athletes who need to increase attention and alertness before training."),
-            new Product('Micellar Casein Protein 1000 g - GymBeam', "Micellar Casein is a protein food supplement having up to 75% portion of protein, and its main advantage is slow (up to 7 hours), gradual and even absorption of amino acids in the body. Therefore is used as a night protein before bedtime and releases troughout the night. It provides better recovery, prevents catabolism and ensures even better protein utilization."),
-            new Product('Synephrine 90 tablets - GymBeam', "Synephrine is one of the most popular fat burners that can support thermogenesis. It contributes to activation of β-3 adrenoreceptors that increase thermogenesis and also support fat breakdown. It is affordably priced and is a natural compound."),
+            new Product('Caffeine 90 tbl - GymBeam', 'Caffeine is made by caffeine tablets with up to 200 mg of caffeine, the most popular stimulant in the world. It is used by bodybuilders, athletes, but also by other athletes who need to increase attention and alertness before training.'),
+            new Product('Micellar Casein Protein 1000 g - GymBeam', 'Micellar Casein is a protein food supplement having up to 75% portion of protein, and its main advantage is slow (up to 7 hours), gradual and even absorption of amino acids in the body. Therefore is used as a night protein before bedtime and releases troughout the night. It provides better recovery, prevents catabolism and ensures even better protein utilization.'),
+            new Product('Synephrine 90 tablets - GymBeam', 'Synephrine is one of the most popular fat burners that can support thermogenesis. It contributes to activation of β-3 adrenoreceptors that increase thermogenesis and also support fat breakdown. It is affordably priced and is a natural compound.'),
         ];
 
-        $expectedSentiments = [
-            [
-                'pos' => 0.119,
-                'neg' => 0.0,
-                'neu' => 0.881,
-                'compound' => 0.61
-            ],
-            [
-                'pos' => 0.147,
-                'neg' => 0.0,
-                'neu' => 0.853,
-                'compound' => 0.7964
-            ],
-            [
-                'pos' => 0.307,
-                'neg' => 0.0,
-                'neu' => 0.693,
-                'compound' => 0.9055
-            ],
-        ];
+        $results = $this->api->getAllSentiments($products);
+        $scoresToCompare = [];
+        foreach ($results as $data) {
+            $scoresToCompare[] = $data['score'];
+        }
 
-        $result = $this->api->getAllSentiments($products);
-
-        $this->assertEquals($expectedSentiments, $result);
+        $expectedSentiments = [0.61, 0.7964, 0.9055];
+        $this->assertEquals($expectedSentiments, $scoresToCompare);
     }
 
     public function testAddNewWords()

@@ -28,14 +28,26 @@ class VaderSentimentAPI implements InternalSentimentApiInterface
      */
     public function getAllSentiments(array $arrayOfProducts): array
     {
-        $sentiments = [];
+        $productsSentiment = [];
 
         foreach ($arrayOfProducts as $product) {
             $sentiment = $this->getSentiment($product);
-            $sentiments[] = $sentiment;
+            $score = $sentiment['compound'];
+            $type = match (true) {
+                $score >= 0 => 'positive',
+                $score <= 0 => 'negative',
+                $score === 0 => 'neutral',
+            };
+
+            $productsSentiment[] = [
+                'name' => $product->name,
+                'description' => $product->description,
+                'score' => $score,
+                'type' => $type
+            ];
         }
 
-        return $sentiments;
+        return $productsSentiment;
     }
 
     /**

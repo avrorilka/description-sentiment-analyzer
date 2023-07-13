@@ -32,14 +32,19 @@ class TwinwordSentimentAPI implements ExternalSentimentApiInterface
      */
     public function getAllSentiments(array $arrayOfProducts): array
     {
-        $sentiments = [];
+        $productsSentiment = [];
 
         foreach ($arrayOfProducts as $product) {
             $sentiment = $this->getSentiment($product);
-            $sentiments[] = $sentiment;
+            $productsSentiment[] = [
+                'name' => $product->name,
+                'description' => $product->description,
+                'score' => $sentiment->score,
+                'type' => $sentiment->type
+            ];
         }
 
-        return $sentiments;
+        return $productsSentiment;
     }
 
     /**
