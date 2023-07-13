@@ -1,7 +1,9 @@
 <?php
 
-namespace App;
+namespace App\Product;
 
+use App\ExternalAPIs\TwinwordSentimentAPI;
+use App\InternalAPIs\VaderSentimentAPI;
 use GuzzleHttp\Exception\GuzzleException;
 
 class ProductRepository
@@ -15,7 +17,7 @@ class ProductRepository
         $this->vader = new VaderSentimentAPI();
         $this->twinword = new TwinwordSentimentAPI();
 
-        $descriptionProvider = new CSVFileDescriptionProvider();
+        $descriptionProvider = new ProductCSVReader();
         $this->formattedProducts = $descriptionProvider->readProducts();
     }
 

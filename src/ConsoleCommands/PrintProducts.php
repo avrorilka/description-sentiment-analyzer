@@ -1,15 +1,15 @@
 <?php
 
-namespace App\Commands;
+namespace App\ConsoleCommands;
 
-use App\ProductRepository;
+use App\Product\ProductRepository;
 use GuzzleHttp\Exception\GuzzleException;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Helper\Table;
 use Symfony\Component\Console\Helper\TableSeparator;
 use Symfony\Component\Console\Input\InputInterface;
-use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Input\InputOption;
+use Symfony\Component\Console\Output\OutputInterface;
 
 class PrintProducts extends Command
 {
@@ -90,7 +90,7 @@ class PrintProducts extends Command
         foreach ($data as $row) {
             $name = strlen($row['name']) > 45 ? substr($row['name'], 0, 42) . '...' : $row['name'];
             $description = strlen($row['description']) > 100 ? substr($row['description'], 0, 97) . '...' : $row['description'];
-            $score = $row['score'];
+            $score = round(floatval($row['score']), 5);
             $formattedScore = $score;
 
             if ($score === $maxScore) {
@@ -101,7 +101,7 @@ class PrintProducts extends Command
 
             $tableData[] = [
                 'name' => $name,
-                'score' => round($formattedScore, 5),
+                'score' => $formattedScore,
                 'description' => $description,
             ];
         }

@@ -1,10 +1,10 @@
 <?php
 
-use App\Product;
-use App\TwinwordSentimentAPI;
-use PHPUnit\Framework\TestCase;
+use App\ExternalAPIs\TwinwordSentimentAPI;
+use App\Product\Product;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\GuzzleException;
+use PHPUnit\Framework\TestCase;
 
 class TwinwordSentimentAPITest extends TestCase
 {

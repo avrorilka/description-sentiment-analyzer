@@ -1,9 +1,9 @@
 <?php
 
+use App\Product\ProductCSVReader;
 use PHPUnit\Framework\TestCase;
-use App\CSVFileDescriptionProvider;
 
-class CSVFileDescriptionProviderTest extends TestCase
+class ProductCSVReaderTest extends TestCase
 {
     private string $file;
     private string $fileEmpty;
@@ -16,7 +16,7 @@ class CSVFileDescriptionProviderTest extends TestCase
 
     public function testGetDescriptions()
     {
-        $descriptionProvider = new CSVFileDescriptionProvider($this->file);
+        $descriptionProvider = new ProductCSVReader($this->file);
         $descriptions = $descriptionProvider->readProducts();
 
         // Assertions
@@ -35,7 +35,7 @@ class CSVFileDescriptionProviderTest extends TestCase
 
     public function testEmptyFile()
     {
-        $descriptionProvider = new CSVFileDescriptionProvider($this->fileEmpty);
+        $descriptionProvider = new ProductCSVReader($this->fileEmpty);
         $descriptions = $descriptionProvider->readProducts();
 
         // Assertions

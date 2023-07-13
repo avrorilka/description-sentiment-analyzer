@@ -1,14 +1,15 @@
 <?php
 
-namespace App;
+namespace App\ExternalAPIs;
 
+use App\Product\Product;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\GuzzleException;
 use stdClass;
 
 class TwinwordSentimentAPI implements ExternalSentimentApiInterface
 {
-    private $client;
+    private Client $client;
 
     public function __construct()
     {

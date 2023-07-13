@@ -1,8 +1,8 @@
 <?php
 
-namespace App;
+namespace App\Product;
 
-class CSVFileDescriptionProvider implements DescriptionProviderInterface
+class ProductCSVReader
 {
     private string $filePath;
 

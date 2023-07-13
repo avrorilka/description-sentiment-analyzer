@@ -1,7 +1,8 @@
 <?php
 
-namespace App;
+namespace App\InternalAPIs;
 
+use App\Product\Product;
 use Sentiment\Analyzer;
 
 class VaderSentimentAPI implements InternalSentimentApiInterface

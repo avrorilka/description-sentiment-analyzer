@@ -1,7 +1,7 @@
 <?php
 
-use App\Product;
-use App\VaderSentimentAPI;
+use App\InternalAPIs\VaderSentimentAPI;
+use App\Product\Product;
 use PHPUnit\Framework\TestCase;
 use Sentiment\Analyzer;
 
